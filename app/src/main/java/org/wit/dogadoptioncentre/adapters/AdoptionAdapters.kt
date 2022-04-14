@@ -6,8 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import org.wit.dogadoptioncentre.R
 import org.wit.dogadoptioncentre.databinding.ViewcardAdoptionBinding
 import org.wit.dogadoptioncentre.models.AdoptionModel
+interface AdoptionClickListener {
+    fun onAdoptionClick(donation: AdoptionModel)
+}
 
-class AdoptionAdapters constructor(private var adoptions: List<AdoptionModel>)
+class AdoptionAdapters constructor(private var adoptions: List<AdoptionModel>,
+                                   private val listener: AdoptionClickListener)
     : RecyclerView.Adapter<AdoptionAdapters.MainHolder>()
 {
 
@@ -18,13 +22,13 @@ class AdoptionAdapters constructor(private var adoptions: List<AdoptionModel>)
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val adopt = adoptions[holder.adapterPosition]
-        holder.bind(adopt)
+        holder.bind(adopt, listener)
     }
 
     override fun getItemCount(): Int=adoptions.size
 
    inner class MainHolder(val binding: ViewcardAdoptionBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(adoptionModel: AdoptionModel){
+        fun bind(adoptionModel: AdoptionModel, listener: AdoptionClickListener){
 
 //            binding.nameOfPet1.text = adoptionModel.dogName
 //            binding.nameOfBreed2.text = adoptionModel.dogBreed
@@ -34,6 +38,7 @@ class AdoptionAdapters constructor(private var adoptions: List<AdoptionModel>)
 //
             binding.adoption =adoptionModel
             binding.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
+            binding.root.setOnClickListener { listener.onAdoptionClick(adoptionModel) }
             binding.executePendingBindings()
 
 

@@ -6,8 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.navArgs
 
 class AdoptionDetailFragment : Fragment() {
+
+    private val args by navArgs<AdoptionDetailFragmentArgs>()
+
 
     companion object {
         fun newInstance() = AdoptionDetailFragment()
@@ -19,13 +24,16 @@ class AdoptionDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.adoption_detail_fragment, container, false)
+
+        val view = inflater.inflate(R.layout.adoption_detail_fragment, container, false)
+
+        Toast.makeText(context,"Adoption ID Selected : ${args.adoptionid}",Toast.LENGTH_LONG).show()
+
+        return view
+
+
+
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AdoptionDetailViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
 }

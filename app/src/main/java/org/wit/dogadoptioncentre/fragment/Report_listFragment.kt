@@ -14,12 +14,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.wit.dogadoptioncentre.R
 import org.wit.dogadoptioncentre.ViewModel.ReportViewModelContent
 import org.wit.dogadoptioncentre.adapters.AdoptionAdapters
+import org.wit.dogadoptioncentre.adapters.AdoptionClickListener
 import org.wit.dogadoptioncentre.databinding.FragmentReportListBinding
 import org.wit.dogadoptioncentre.main.AdoptionXApp
 import org.wit.dogadoptioncentre.models.AdoptionModel
 
 
-class Report_listFragment : Fragment() {
+class Report_listFragment : Fragment() , AdoptionClickListener {
     lateinit var app: AdoptionXApp
     private var _fragBinding: FragmentReportListBinding? = null
     private val fragBinding get() = _fragBinding!!
@@ -65,7 +66,7 @@ class Report_listFragment : Fragment() {
     }
 
     private fun render(adoptionRender: List<AdoptionModel>) {
-        fragBinding.recyclerView.adapter = AdoptionAdapters(adoptionRender)
+        fragBinding.recyclerView.adapter = AdoptionAdapters(adoptionRender,this)
         if (adoptionRender.isEmpty()) {
             fragBinding.recyclerView.visibility = View.GONE
             fragBinding.adoptionNotFound.visibility = View.VISIBLE
@@ -151,7 +152,11 @@ class Report_listFragment : Fragment() {
             requireView().findNavController()) || super.onOptionsItemSelected(item)
     }
 
+    override fun onAdoptionClick(adoption: AdoptionModel) {
+        val action = Report_listFragmentDirections.actionReportListFragmentToAdoptionDetailFragment(adoption.id )
+        findNavController().navigate(action)
 
+    }
 
 
 }

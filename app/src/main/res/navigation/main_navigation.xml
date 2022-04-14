@@ -24,9 +24,6 @@
             android:id="@+id/action_adoptionHomeFragment_to_report_listFragment2"
             app:destination="@id/report_listFragment"
             app:enterAnim="@anim/nav_default_enter_anim" />
-        <action
-            android:id="@+id/action_adoptionHomeFragment_to_adoptionDetailFragment"
-            app:destination="@id/adoptionDetailFragment" />
     </fragment>
 
     <fragment
@@ -38,6 +35,9 @@
             android:id="@+id/action_report_listFragment_to_adoptionHomeFragment"
             app:destination="@id/adoptionHomeFragment"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_report_listFragment_to_adoptionDetailFragment"
+            app:destination="@id/adoptionDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutUsFragment"
@@ -50,8 +50,12 @@
         android:label="adoption_detail_fragment"
         tools:layout="@layout/adoption_detail_fragment" >
         <action
-            android:id="@+id/action_adoptionDetailFragment_to_adoptionHomeFragment"
-            app:destination="@id/adoptionHomeFragment" />
+            android:id="@+id/action_adoptionDetailFragment_to_report_listFragment"
+            app:destination="@id/report_listFragment" />
+
+        <argument
+            android:name="adoptionid"
+            app:argType="long" />
     </fragment>
 
 
