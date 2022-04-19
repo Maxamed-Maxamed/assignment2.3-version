@@ -44,11 +44,13 @@
         android:name="org.wit.dogadoptioncentre.fragment.AboutUsFragment"
         android:label="@string/action_about"
         tools:layout="@layout/fragment_about_us" />
+
     <fragment
         android:id="@+id/adoptionDetailFragment"
         android:name="org.wit.dogadoptioncentre.AdoptionDetailFragment"
-        android:label="adoption_detail_fragment"
+        android:label="adoption detail"
         tools:layout="@layout/adoption_detail_fragment" >
+
         <action
             android:id="@+id/action_adoptionDetailFragment_to_report_listFragment"
             app:destination="@id/report_listFragment" />

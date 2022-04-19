@@ -53,11 +53,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/name_dog"
-            android:text="@{Long.toString(adoption.id)}"
+            android:text="@{adoption.dogName}"
+
+
 
 
             />
-
+        <!--            android:text="@{Long.toString(adoption.id)}"-->
         <TextView
             android:id="@+id/nameOfBreed2"
             android:layout_width="140dp"
@@ -67,7 +69,10 @@
             android:layout_marginEnd="112dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/name_breed" />
+            tools:text="@string/name_breed"
+            android:text="@{adoption.dogBreed}"
+            />
+
 
         <TextView
             android:id="@+id/nameOfLocation3"
@@ -78,6 +83,7 @@
             android:fontFamily="sans-serif-black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:text="@{adoption.dogLocation}"
             tools:text="@string/name_location" />
 
         <RatingBar
@@ -88,7 +94,9 @@
             android:layout_marginEnd="72dp"
             android:contentDescription="@string/rating_Bars"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:rating="@{adoption.ratingbar}"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

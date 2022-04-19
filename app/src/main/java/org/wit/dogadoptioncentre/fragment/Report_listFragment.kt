@@ -153,8 +153,8 @@ class Report_listFragment : Fragment() , AdoptionClickListener {
     }
 
     override fun onAdoptionClick(adoption: AdoptionModel) {
-        val action = Report_listFragmentDirections.actionReportListFragmentToAdoptionDetailFragment(adoption.id )
-        findNavController().navigate(action)
+       val action = Report_listFragmentDirections.actionReportListFragmentToAdoptionDetailFragment(adoption.id)
+       findNavController().navigate(action)
 
     }
 
