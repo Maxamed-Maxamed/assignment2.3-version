@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +16,7 @@ import org.wit.dogadoptioncentre.ViewModel.ReportViewModelContent
 import org.wit.dogadoptioncentre.databinding.FragmentAdoptionHomeBinding
 import org.wit.dogadoptioncentre.main.AdoptionXApp
 import org.wit.dogadoptioncentre.models.AdoptionModel
+import org.wit.dogadoptioncentre.ui.auth.LoggedInViewModel
 import timber.log.Timber
 
 
@@ -24,6 +26,7 @@ class AdoptionHomeFragment : Fragment() {
     private val fragBinding get() = _fragBinding!!
     var adoption_models = AdoptionModel()
     private lateinit var adoptionViewModelContent: AdoptionViewModelContent
+    private val loggedInViewModel : LoggedInViewModel by activityViewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,7 +83,13 @@ class AdoptionHomeFragment : Fragment() {
                 adoption_models.dogBreed = fragBinding.nameOfBreed2.text.toString()
                 adoption_models.dogLocation = fragBinding.nameOfLocation3.text.toString()
                 adoption_models.ratingbar = fragBinding.ratingBar.rating
-                app.adoptionStore.create(AdoptionModel(id = adoption_models.id, dogName = adoption_models.dogName, dogBreed = adoption_models.dogBreed, dogLocation = adoption_models.dogLocation, ratingbar = adoption_models.ratingbar))
+//                app.adoptionStore.create(AdoptionModel(id = adoption_models.id, dogName = adoption_models.dogName, dogBreed = adoption_models.dogBreed, dogLocation = adoption_models.dogLocation, ratingbar = adoption_models.ratingbar))
+
+               adoptionViewModelContent.addDonation(loggedInViewModel.liveFirebaseUser,adoption_models.copy())
+
+//                donateViewModel.addDonation(loggedInViewModel.liveFirebaseUser,
+//                    DonationModel(paymentmethod = paymentmethod,amount = amount,
+//                        email = loggedInViewModel.liveFirebaseUser.value?.email!!))
                 Timber.i("it has been add up")
             }
 
@@ -107,13 +116,14 @@ class AdoptionHomeFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
-        var total= app.adoptionStore.findAll().sumOf { it.id }
-        app.adoptionStore.findAll().sumOf { it.id }
+//        var total= app.adoptionStore.findAll().sumOf { it.id }
+//        app.adoptionStore.findAll().sumOf { it.id }
         val reportViewModel= ViewModelProvider(this).get(ReportViewModelContent::class.java)
 
 
+
        reportViewModel.observableAdoptionsList.observe(viewLifecycleOwner, Observer {
-           total= reportViewModel.observableAdoptionsList.value!!.sumOf { it.id }
+         reportViewModel.observableAdoptionsList.value!!.sumOf { it.id }
        })
 
     }

@@ -11,7 +11,7 @@ class AdoptionXApp : Application() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-        adoptionStore = AdoptionManager
+//        adoptionStore = AdoptionManager
         Timber.i("Starting AdoptionX Application")
     }
 
